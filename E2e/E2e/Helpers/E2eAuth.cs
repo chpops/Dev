@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Dev.E2e
@@ -35,6 +36,24 @@ namespace Dev.E2e
 			{
 				Stop();
 				throw new Exception("[FAILED] - Что-то пошло не так на странице ввода пароля");
+			}
+
+			try
+			{
+				var presentation = WaitByXpathContains("Добро пожаловать, Тестовый Аккаунт!");
+
+				if (presentation!=null)
+					Debug.WriteLine("Авторизация прошла успешно! Идёт запуск тестовых сценариев");
+				else
+				{
+					driver.FindElement(ByXPathContains("Готово")).Click();
+					WaitByXpathContainsWithCheck("Добро пожаловать, Тестовый Аккаунт!");
+				}
+			}
+			catch
+			{
+				Stop();
+				throw new Exception("[FAILED] - Что-то пошло не так после ввода логина:пароля");
 			}
 		}
 	}

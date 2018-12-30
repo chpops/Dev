@@ -23,7 +23,7 @@ namespace Dev.E2e
 
 			ChromeOptions option = new ChromeOptions();
 			option.AddArguments("headless","disable-gpu","no-sandbox","window-size=1280,720");
-			this.driver=new ChromeDriver(appPath);
+			this.driver=new ChromeDriver(appPath); // with headless option test has error
 			//Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(60);
 		}
 
